@@ -1,0 +1,40 @@
+{% extends "homepage/base.html" %}
+
+{% block exCss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/team.css' %}">
+{% endblock %}
+
+{% block title %}Team{% endblock %}
+
+{% block content %}
+
+    <div class="header-container">
+        <h1 class="th1">MEET THE</h1>
+        <h1 class="th2">TEAM</h1>
+    </div>
+
+    <div class="member-container">
+        <div class="member-holder">
+            {% load static %}
+            <a href="https://www.facebook.com/rono.koushique"><img class="member-pic" src="{% static 'img/rono.jpg' %}"></a>
+            <h1 class="member-name">RONO KOUSHIQUE</h1>
+            <h1 class="member-post">WEB DEV</h1>
+        </div>
+
+        <div class="member-holder">
+            {% load static %}
+            <a href="https://www.facebook.com/sage.robi"><img class="member-pic" src="{% static 'img/sany.jpg' %}"></a>
+            <h1 class="member-name">RABY US SANY</h1>
+            <h1 class="member-post">CEO</h1>
+        </div>
+
+        <div class="member-holder">
+            {% load static %}
+            <a href="https://www.facebook.com/sakibshahrior"><img class="member-pic" src="{% static 'img/sakib.jpg' %}"></a>
+            <h1 class="member-name">SHAHRIAR SAKIB</h1>
+            <h1 class="member-post">MARKETING</h1>
+        </div>
+    </div>
+
+{% endblock %}

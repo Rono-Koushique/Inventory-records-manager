@@ -1,0 +1,33 @@
+body {
+    background-image: url("../img/bgGradient.jpg")
+}
+
+.navbar {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav .nav-item {
+    text-align: center;
+}
+
+.navbar-nav .leftL {
+    border-radius: 0px 0px 0px 25px;
+    border-right: 1px solid #6e6e6e3a;
+}
+
+.navbar-nav .rightL {
+    border-radius: 0px 0px 25px 0px;
+    border-left: 1px solid #6e6e6e3a;
+}
+
+.navbar-nav a{
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: white;
+    font-weight: 600;
+}
+

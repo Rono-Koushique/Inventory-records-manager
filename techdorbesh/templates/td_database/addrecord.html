@@ -1,0 +1,162 @@
+{% extends "td_database/base.html" %}
+
+{% block exCss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/database_addrecord.css' %}">
+{% endblock %}
+
+{% block title %}Add Record{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container"><hr style="background-color: rgba(0, 0, 0, 0); margin: 5px;"></div>
+
+    <div class="container">
+        <label class="subtitle">CUSTOMER'S INFO</label>
+    </div>
+
+    <div class="container shadow panels">
+        <div class="row m-0">
+            <div class="col-md-3 pannel-cols">
+                <div class="form-group formContainers">
+                    <label for="bill-no">BILL NO:</label>
+                    <div>
+                        {{formSell.id}}
+                    </div>
+                </div>
+                <div class="form-group formContainers">
+                    <label for="bill-date">DATE:</label>
+                    <div>
+                        {{formSell.date}}
+<!--                        <input type="text" id="bill-date" style="width: 180px !important" value="{{dateTime}}" readonly>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pannel-cols">
+                <div class="form-group formContainers">
+                    <label>CUSTOMER NAME:</label>
+                    <div>{{formSell.cusName}}</div>
+                </div>
+                <div class="form-group formContainers">
+                    <label>ADDRESS:</label>
+                    <div>{{formSell.cusAddress}}</div>
+                </div>
+            </div>
+            <div class="col-md-3 pannel-cols">
+                <div class="form-group formContainers">
+                    <label for="contact">CONTACT:</label>
+                    <div>{{formSell.cusContact}}</div>
+                </div>
+                <div class="form-group formContainers">
+                    <label for="mail">E-MAIL:</label>
+                    <div>{{formSell.cusEmail}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"><hr style="background-color: rgba(0, 0, 0, 0); margin: 5px;"></div>
+
+    <div class="container">
+        <label class="subtitle">ORDERS</label>
+    </div>
+
+    <div class="container  shadow panels">
+        <div class="row" style="width: 100%; margin: 0;">
+            <form method="POST" action="/db_addrecord">
+                <div class="form-group col-md-4 formContainers flex-column">
+                    <div class="label">{{formOrder.product.label}}</div>
+                    {{formOrder.product}}
+                </div>
+                <div class="form-group col-md-2 formContainers flex-column">
+                    <div class="label">{{formOrder.order_quantity.label}}</div>
+                    {{formOrder.order_quantity}}
+                </div>
+                <div class="form-group col-md-1 formContainers" style="display: flex; align-items: flex-end;">
+                    <button class="btn btn-light btn-sm p-0" type="submit" name="btn_search">SEARCH</button>
+                </div>
+            </form>
+
+            <div class="form-group col-md-2 formContainers flex-column">
+                <div class="label">Price (buy)</div>
+                {{formOrder.price_buy}}
+            </div>
+            <div class="form-group col-md-2 formContainers flex-column">
+                <div class="label">Price (sell)</div>
+                {{formOrder.price_sell}}
+            </div>
+            <div class="form-group col-md-1 formContainers" style="display: flex; align-items: flex-end;">
+                <button class="btn btn-light btn-sm p-0" type="submit" name="btn_update">UPDATE</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container"><hr style="background-color: rgba(0, 0, 0, 0); margin: 5px;"></div>
+
+    <div class="container">
+        <label class="subtitle">LIST</label>
+    </div>
+
+    <div class="container p-0">
+        <div class="row">
+            <div class="col-md-8" style="padding-right: 10px !important;">
+                <div class="container shadow table-wrapper-scroll-y my-custom-scrollbar" style="background-color: rgba(0, 0, 0, 0.3); border-radius: 2px; padding: 0; height: 45vh">
+                    <table class="table table-dark table-hover mb-0" style="--bs-table-bg: rgba(0, 0, 0, 0); border-color: rgba(0, 0, 0, 0.2);">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                            <th>Total</th>
+                        </tr>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.product.name}}</td>
+                            <td>{{order.order_quantity}}</td>
+                            <td>{{order.price_sell}}</td>
+                            <td>{{order.price_total}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="shadow panels" style="height: 45vh">
+                    <div class="row m-0" style="width: 100%;">
+                        <div class="form-group formContainers">
+                            <label>TOTAL</label>
+                            <div>
+                                {{formSell.total}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<script>
+    $( function() {
+        var availableTags = [{% for product in products %} "{{product.name}}", {% endfor %}];
+        $( "#id_product" ).autocomplete({
+            source: availableTags
+        });
+    } );
+
+    $( function() {
+        var availableTags = [{% for sell in sells %} "{{sell.cusName}}", {% endfor %}];
+        $( "#id_cusName" ).autocomplete({
+            source: availableTags
+        });
+    } );
+</script>
+
+
+{% endblock %}

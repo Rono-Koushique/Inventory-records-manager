@@ -1,0 +1,53 @@
+{% extends "homepage/base.html" %}
+
+{% block exCss %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="header-container">
+    <h1 class="th1">Registration</h1>
+</div>
+
+<section class="container-fluid card-container">
+    <section class="row justify-content-center">
+        <section class="col-12 col-sm-6 col-md-3">
+            <form class="form-container" method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{form.username}}
+                </div>
+                <div class="form-group">
+                    {{form.email}}
+                </div>
+                <div class="form-group">
+                    {{form.password1}}
+                </div>
+                <div class="form-group">
+                    {{form.password2}}
+                </div>
+                <button type="submit" name="Create User">CREATE ACCOUNT</button>
+            </form>
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        </section>
+    </sectio>
+</section>
+
+{% block exJs %}
+
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Username';
+    form_fields[2].placeholder = 'E-mail';
+    form_fields[3].placeholder = 'Password';
+    form_fields[4].placeholder = 'Confirm Password';
+</script>
+
+{% endblock %}
+
+{% endblock %}

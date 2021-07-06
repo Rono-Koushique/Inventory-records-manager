@@ -1,0 +1,64 @@
+.subtitle {
+    color: rgba(0,0,0,0.4) !important;
+    font-size: 1.5rem !important;
+    font-weight: 400;
+}
+
+.panels {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 2px;
+    padding: 0.25rem !important;
+}
+
+.pannel-cols {
+    padding: 0 !important;
+}
+
+.panels button {
+    width: 100%;
+    height: 1.6rem;
+    border: 0;
+}
+
+.formContainers {
+    margin: 0 !important;
+    padding: 0.25rem !important;
+    align-items: left !important;
+}
+
+.form-group {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: left;
+    margin-bottom: 5px;
+}
+
+label {
+    color: white;
+    font-weight: 500;
+}
+
+.label {
+    color: white;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    border-radius : 2px;
+    border: none;
+    background-color: rgba(255,255,255,0.8);
+}
+
+input[name = 'cusName'] {width: 390px;}
+input[name = 'cusAddress'] {width: 390px;}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}

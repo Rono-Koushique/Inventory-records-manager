@@ -1,0 +1,94 @@
+{% extends "td_database/base.html" %}
+
+{% block exCss %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/database_inventory.css' %}">
+{% endblock %}
+
+{% block title %}Add Record{% endblock %}
+
+{% block content %}
+
+<div class="container"><hr style="background-color: rgba(0, 0, 0, 0); margin: 5px;"></div>
+
+<div class="container">
+    <label class="subtitle">UPDATE RECORDS</label>
+</div>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <div class="container shadow panels">
+        <div class="row" style="width: 100%; margin: 0;">
+            <div class="form-group col-md-4 formContainers">
+                <div class="label">{{form.name.label}}</div>
+                {{form.name}}
+            </div>
+            <div class="form-group col-md-2 formContainers">
+                <div class="label">{{form.category.label}}</div>
+                {{form.category}}
+            </div>
+            <div class="form-group col-md-1 formContainers">
+                <div class="label">{{form.unit.label}}</div>
+                {{form.unit}}
+            </div>
+            <div class="form-group col-md-2 formContainers">
+                <div class="label">{{form.quantity.label}}</div>
+                {{form.quantity}}
+            </div>
+            <div class="form-group col-md-2 formContainers">
+                <div class="label">Buying Price</div>
+                {{form.priceBuy}}
+            </div>
+            <div class="form-group col-md-1 formContainers" style="display: flex; align-items: flex-end;">
+                <button class="btn btn-light btn-sm p-0" type="submit">UPDATE</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="container"><hr style="background-color: rgba(0, 0, 0, 0); margin: 5px;"></div>
+
+<div class="container">
+    <label class="subtitle">ALL PRODUCTS</label>
+</div>
+
+<div class="container shadow table-wrapper-scroll-y my-custom-scrollbar" style="background-color: rgba(0, 0, 0, 0.3); border-radius: 2px; padding: 0; height: 65vh">
+    <table class="table table-dark table-hover mb-0" style="--bs-table-bg: rgba(0, 0, 0, 0); border-color: rgba(0, 0, 0, 0.2);">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Unit</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.unit}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.priceBuy}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    $( function() {
+        var availableTags = [{% for product in products %} "{{product.name}}", {% endfor %}];
+        $( "#id_name" ).autocomplete({
+          source: availableTags
+        });
+      } );
+
+      $( function() {
+        var availableTags = [{% for product in products %} "{{product.category}}", {% endfor %}];
+        $( "#id_category" ).autocomplete({
+            source: availableTags
+        });
+    } );
+</script>
+
+{% endblock %}
